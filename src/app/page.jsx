@@ -18,11 +18,20 @@ export default function App() {
   ];
 
   return (
-    <div className="relative min-h-screen w-full overflow-hidden bg-linear-to-b from-purple-500/20 via-black to-fuchsia-600/20">
+    <div className="relative min-h-screen w-full overflow-hidden bg-gradient-to-b from-purple-500/20 via-black to-fuchsia-600/20">
 
       <main className="relative w-full min-h-screen flex items-center justify-center p-6 py-10">
         <AnimatePresence mode="wait">
-          {screens[currentScreen]}
+          <motion.div
+            key={currentScreen}
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: 0.95 }}
+            transition={{ duration: 0.5 }}
+            className="w-full flex justify-center"
+          >
+            {screens[currentScreen]}
+          </motion.div>
         </AnimatePresence>
       </main>
 
