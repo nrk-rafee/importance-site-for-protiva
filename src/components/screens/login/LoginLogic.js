@@ -1,5 +1,5 @@
  function validateLogin(password) {
-  const correctPassword = "6511";
+  const correctPassword = "love_you";
 
   if (password === correctPassword) {
     return true;
