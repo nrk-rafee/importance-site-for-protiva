@@ -9,12 +9,22 @@ const [password, setPassword] = useState("");
     <div className="login-container">
       <h1>Login Page</h1>
 
-      <input type="text" placeholder="Username" />
+      <input
+    type="text"
+    placeholder="Username"
+    value={username}
+    onChange={(e) => setUsername(e.target.value)}
+/>
 
       <br />
       <br />
 
-      <input type="password" placeholder="Password" />
+      <input
+    type="password"
+    placeholder="Password"
+    value={password}
+    onChange={(e) => setPassword(e.target.value)}
+/>
 
       <br />
       <br />
