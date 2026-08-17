@@ -1,21 +1,139 @@
+.body {
+  margin: 0;
+  padding: 0;
+  background: linear-gradient(135deg, #f6d365, #fda085);
+  min-height: 100vh;
+}
+
 .login-container {
-    width: 300px;
-    margin: 100px auto;
-    text-align: center;
+  width: 340px;
+  margin: 80px auto;
+  padding: 30px;
+  background: white;
+  border-radius: 25px;
+  text-align: center;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+}
+
+.girl {
+  margin-bottom: 25px;
+}
+
+.face {
+  width: 140px;
+  height: 140px;
+  margin: auto;
+  border-radius: 50%;
+  background: #ffe0bd;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  animation: float 3s infinite;
+}
+
+.eyes {
+  font-size: 40px;
+}
+
+.mouth {
+  font-size: 32px;
+  margin-top: 10px;
 }
 
 h1 {
-    margin-bottom: 20px;
+  margin-bottom: 25px;
 }
 
 input {
-    width: 100%;
-    padding: 10px;
-    margin: 8px 0;
-    box-sizing: border-box;
+  width: 100%;
+  padding: 14px;
+  margin-bottom: 15px;
+  box-sizing: border-box;
+  border: 2px solid #ddd;
+  border-radius: 12px;
+  font-size: 16px;
 }
 
 button {
-    padding: 10px 20px;
-    cursor: pointer;
+  width: 100%;
+  padding: 14px;
+  border: none;
+  border-radius: 12px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+button:hover {
+  transform: scale(1.05);
+}
+
+.error {
+  color: red;
+  font-weight: bold;
+  animation: shake 0.5s;
+}
+
+.success {
+  color: green;
+  font-weight: bold;
+}
+
+.sad .face {
+  animation: shake 0.5s infinite;
+}
+
+.happy .face {
+  animation: bounce 1s infinite;
+}
+
+@keyframes float {
+  0% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-8px);
+  }
+
+  100% {
+    transform: translateY(0);
+  }
+}
+
+@keyframes shake {
+  0% {
+    transform: translateX(0);
+  }
+
+  25% {
+    transform: translateX(-8px);
+  }
+
+  50% {
+    transform: translateX(8px);
+  }
+
+  75% {
+    transform: translateX(-8px);
+  }
+
+  100% {
+    transform: translateX(0);
+  }
+}
+
+@keyframes bounce {
+  0% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-12px);
+  }
+
+  100% {
+    transform: translateY(0);
+  }
 }
