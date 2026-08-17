@@ -7,7 +7,7 @@ function LoginScreen() {
   const [showPassword, setShowPassword] = useState(false);
   const [status, setStatus] = useState("normal");
 
-  const correctPassword = "6511";
+  const correctPassword = "love_Welcome";
 
   const checkPassword = () => {
 
@@ -46,7 +46,7 @@ function LoginScreen() {
       </div>
 
 
-      <h1>Welcome</h1>
+      <h1>Welcome madam</h1>
 
 
       <input
