@@ -16,7 +16,7 @@ function PasswordScreen({ onUnlock }) {
     if (password === correctPassword) {
       onUnlock();
     } else {
-      alert("তুমি ফেল😼 !");
+      alert("try again baby😖 !");
     }
   };
 
