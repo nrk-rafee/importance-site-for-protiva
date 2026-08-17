@@ -1,43 +1,110 @@
 import React, { useState } from "react";
 import "./LoginStyles.css";
-import validateLogin from "./LoginLogic";
 
 function LoginScreen() {
-  const [username, setUsername] = useState("");
-const [password, setPassword] = useState("");
+
+  const [password, setPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
+  const [status, setStatus] = useState("normal");
+
+  const correctPassword = "6511";
+
+  const checkPassword = () => {
+
+    if(password === correctPassword){
+      setStatus("happy");
+
+      setTimeout(() => {
+        window.location.href = "/home";
+      },1500);
+
+    }else{
+      setStatus("sad");
+    }
+
+  };
+
+
   return (
+
     <div className="login-container">
-      <h1>Login Page</h1>
+
+      <div className={`girl ${status}`}>
+
+        <div className="face">
+
+          <div className="eyes">
+            {showPassword ? "👀" : "😊"}
+          </div>
+
+          <div className="mouth">
+            {status === "sad" ? "😢" : status === "happy" ? "😁" : "🙂"}
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <h1>Welcome</h1>
+
 
       <input
-    type="text"
-    placeholder="Username"
-    value={username}
-    onChange={(e) => setUsername(e.target.value)}
-/>
 
-      <br />
-      <br />
+        type={showPassword ? "text" : "password"}
 
-      <input
-    type="password"
-    placeholder="Password"
-    value={password}
-    onChange={(e) => setPassword(e.target.value)}
-/>
+        placeholder="Enter Password"
 
-      <br />
-      <br />
+        value={password}
+
+        onChange={(e)=>{
+
+          setPassword(e.target.value);
+          setStatus("normal");
+
+        }}
+
+      />
+
 
       <button
-  onClick={() => {
-    alert(validateLogin(username, password));
-  }}
->
-  Login
-</button>
+
+        onMouseDown={()=>setShowPassword(true)}
+
+        onMouseUp={()=>setShowPassword(false)}
+
+        onClick={checkPassword}
+
+      >
+
+        Login
+
+      </button>
+
+
+      {
+        status === "sad" &&
+
+        <p className="error">
+          Wrong Password 😢
+        </p>
+      }
+
+
+      {
+        status === "happy" &&
+
+        <p className="success">
+          Welcome ❤️
+        </p>
+      }
+
+
     </div>
+
   );
+
 }
+
 
 export default LoginScreen;
