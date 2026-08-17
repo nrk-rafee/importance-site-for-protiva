@@ -1,4 +1,6 @@
 import React from "react";
+import "./LoginStyles.css";
+import validateLogin from "./LoginLogic";
 
 function LoginScreen() {
   return (
@@ -15,7 +17,13 @@ function LoginScreen() {
       <br />
       <br />
 
-      <button>Login</button>
+      <button
+  onClick={() => {
+    alert(validateLogin("admin", "1234"));
+  }}
+>
+  Login
+</button>
     </div>
   );
 }
