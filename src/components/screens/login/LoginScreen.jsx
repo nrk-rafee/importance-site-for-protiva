@@ -4,7 +4,7 @@ import validateLogin from "./LoginLogic";
 
 function LoginScreen() {
   return (
-    <div>
+    <div className="login-container">
       <h1>Login Page</h1>
 
       <input type="text" placeholder="Username" />
