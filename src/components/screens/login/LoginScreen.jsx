@@ -31,7 +31,7 @@ const [password, setPassword] = useState("");
 
       <button
   onClick={() => {
-    alert(validateLogin("admin", "1234"));
+    alert(validateLogin(username, password));
   }}
 >
   Login
