@@ -1,8 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import "./LoginStyles.css";
 import validateLogin from "./LoginLogic";
 
 function LoginScreen() {
+  const [username, setUsername] = useState("");
+const [password, setPassword] = useState("");
   return (
     <div className="login-container">
       <h1>Login Page</h1>
