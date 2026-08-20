@@ -1,5 +1,3 @@
-Updated page.jsx
-
 "use client";
 
 import { useState } from "react";
@@ -217,7 +215,7 @@ function PasswordGirl({ state }) {
           opacity="0.35"
         />
 
-        {/* Hands */}
+        {/* Hands covering eyes while typing */}
         {!isChecking && !isWrong && !isHappy && (
           <>
             <motion.path
@@ -304,7 +302,7 @@ function PasswordGirl({ state }) {
           fill="#b66cff"
         />
 
-        {/* Heart */}
+        {/* Small heart */}
         <motion.text
           x="130"
           y="258"
@@ -423,7 +421,7 @@ function PasswordScreen({ onUnlock }) {
             ? "That password isn't right..."
             : state === "happy"
             ? "You got it right! ✨"
-            : "Enter the secret code to continue😉"}
+            : "Enter the secret code to continue 😉"}
         </p>
 
         {/* Password */}
@@ -484,44 +482,39 @@ export default function App() {
   const [currentScreen, setCurrentScreen] = useState(0);
 
   const screens = [
-    /* 0 — Intro */
     <IntroScreen
-      key="1"
+      key="intro"
       onNext={() => setCurrentScreen(1)}
     />,
 
-    /* 1 — Star Screen */
     <StarScreen
-      key="2"
+      key="star"
       onNext={() => setCurrentScreen(2)}
     />,
 
-    /* 2 — Importance Screen */
     <ImportanceScreen
-      key="3"
+      key="importance"
       onNext={() => setCurrentScreen(3)}
     />,
 
-    /* 3 — Message Screen */
     <MessageScreen
-      key="4"
+      key="message"
       onNext={() => setCurrentScreen(4)}
     />,
 
-    /* 4 — Outro */
-    <OutroScreen key="5" />,
+    <OutroScreen
+      key="outro"
+    />,
   ];
 
   return (
     <div className="relative min-h-screen w-full overflow-hidden bg-gradient-to-b from-purple-500/20 via-black to-fuchsia-600/20">
-
       {!unlocked ? (
         <PasswordScreen
           onUnlock={() => setUnlocked(true)}
         />
       ) : (
         <main className="relative w-full min-h-screen flex items-center justify-center p-6 py-10">
-
           <AnimatePresence mode="wait">
             <motion.div
               key={currentScreen}
@@ -547,7 +540,6 @@ export default function App() {
               {screens[currentScreen]}
             </motion.div>
           </AnimatePresence>
-
         </main>
       )}
     </div>
