@@ -7,7 +7,6 @@ import IntroScreen from "@/components/screens/IntroScreen";
 import StarScreen from "@/components/screens/StarScreen";
 import ImportanceScreen from "@/components/screens/ImportanceScreen";
 import MessageScreen from "@/components/screens/MessageScreen";
-import OutroScreen from "@/components/screens/OutroScreen";
 
 /* =========================
    Cute Password Character
@@ -215,7 +214,7 @@ function PasswordGirl({ state }) {
           opacity="0.35"
         />
 
-        {/* Hands covering eyes while typing */}
+        {/* Hands */}
         {!isChecking && !isWrong && !isHappy && (
           <>
             <motion.path
@@ -391,12 +390,10 @@ function PasswordScreen({ onUnlock }) {
           duration: 0.7,
         }}
       >
-        {/* Girl */}
         <div className="character-area">
           <PasswordGirl state={state} />
         </div>
 
-        {/* Title */}
         <motion.h1
           className="password-title"
           animate={
@@ -424,7 +421,6 @@ function PasswordScreen({ onUnlock }) {
             : "Enter the secret code to continue 😉"}
         </p>
 
-        {/* Password */}
         <div className="input-wrapper">
           <input
             type="password"
@@ -447,7 +443,6 @@ function PasswordScreen({ onUnlock }) {
           />
         </div>
 
-        {/* Button */}
         <motion.button
           onClick={checkPassword}
           disabled={
@@ -470,6 +465,359 @@ function PasswordScreen({ onUnlock }) {
         </p>
       </motion.div>
     </div>
+  );
+}
+
+/* =========================
+   Floating Background Stars
+========================= */
+
+function BackgroundStars() {
+  const stars = [
+    { left: "12%", top: "18%", size: 13, delay: 0 },
+    { left: "78%", top: "14%", size: 10, delay: 1.2 },
+    { left: "88%", top: "35%", size: 15, delay: 0.6 },
+    { left: "8%", top: "55%", size: 9, delay: 1.8 },
+    { left: "83%", top: "70%", size: 11, delay: 0.9 },
+    { left: "18%", top: "78%", size: 8, delay: 2 },
+    { left: "67%", top: "84%", size: 12, delay: 1.4 },
+  ];
+
+  return (
+    <div className="pointer-events-none absolute inset-0 overflow-hidden">
+      {stars.map((star, index) => (
+        <motion.div
+          key={index}
+          className="absolute text-white/40"
+          style={{
+            left: star.left,
+            top: star.top,
+            fontSize: star.size,
+          }}
+          animate={{
+            opacity: [0.15, 0.7, 0.15],
+            scale: [0.8, 1.15, 0.8],
+          }}
+          transition={{
+            duration: 2.5 + index * 0.2,
+            delay: star.delay,
+            repeat: Infinity,
+            ease: "easeInOut",
+          }}
+        >
+          ✦
+        </motion.div>
+      ))}
+
+      <div className="absolute left-[20%] top-[10%] h-40 w-40 rounded-full bg-fuchsia-500/10 blur-3xl" />
+      <div className="absolute right-[10%] bottom-[15%] h-52 w-52 rounded-full bg-purple-600/10 blur-3xl" />
+    </div>
+  );
+}
+
+/* =========================
+   Orbiting Decorations
+========================= */
+
+function OrbitDecorations() {
+  return (
+    <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+      {/* Outer orbit */}
+      <motion.div
+        className="absolute h-[285px] w-[285px] rounded-full border border-purple-400/20"
+        animate={{ rotate: 360 }}
+        transition={{
+          duration: 18,
+          repeat: Infinity,
+          ease: "linear",
+        }}
+      >
+        <motion.span
+          className="absolute -top-3 left-1/2 text-2xl"
+          animate={{
+            scale: [1, 1.2, 1],
+          }}
+          transition={{
+            duration: 1.8,
+            repeat: Infinity,
+          }}
+        >
+          💜
+        </motion.span>
+
+        <span className="absolute left-[8%] top-[18%] text-2xl">
+          ⭐
+        </span>
+      </motion.div>
+
+      {/* Inner orbit */}
+      <motion.div
+        className="absolute h-[230px] w-[230px] rounded-full border border-pink-400/15"
+        animate={{ rotate: -360 }}
+        transition={{
+          duration: 13,
+          repeat: Infinity,
+          ease: "linear",
+        }}
+      >
+        <span className="absolute -right-3 top-1/2 text-xl">
+          ✦
+        </span>
+
+        <span className="absolute bottom-2 left-[20%] text-xl">
+          💗
+        </span>
+      </motion.div>
+    </div>
+  );
+}
+
+/* =========================
+   Celebration Particles
+========================= */
+
+function CelebrationParticles({ particles }) {
+  return (
+    <div className="pointer-events-none absolute inset-0 overflow-hidden">
+      <AnimatePresence>
+        {particles.map((particle) => (
+          <motion.div
+            key={particle.id}
+            className="absolute"
+            style={{
+              left: `${particle.left}%`,
+              top: `${particle.top}%`,
+              fontSize: `${particle.size}px`,
+              filter: "drop-shadow(0 0 8px rgba(255,80,190,0.8))",
+            }}
+            initial={{
+              opacity: 0,
+              scale: 0.4,
+              y: 20,
+              rotate: -15,
+            }}
+            animate={{
+              opacity: [0, 1, 1, 0],
+              scale: [0.4, 1.15, 0.9, 0.6],
+              y: [-5, -65, -140, -210],
+              x: particle.drift,
+              rotate: [0, 15, -15, 20],
+            }}
+            exit={{
+              opacity: 0,
+            }}
+            transition={{
+              duration: particle.duration,
+              ease: "easeOut",
+            }}
+          >
+            {particle.type === "heart" ? (
+              <span>{particle.symbol}</span>
+            ) : (
+              <span>{particle.symbol}</span>
+            )}
+          </motion.div>
+        ))}
+      </AnimatePresence>
+    </div>
+  );
+}
+
+/* =========================
+   Final Demo-Like Screen
+========================= */
+
+function FinalScreen() {
+  const [clickCount, setClickCount] = useState(0);
+  const [particles, setParticles] = useState([]);
+
+  const createParticles = (type) => {
+    const symbols =
+      type === "heart"
+        ? ["♥", "❤", "💗", "💖", "💕"]
+        : ["🌸", "🌷", "🌼", "💮", "✿"];
+
+    const newParticles = Array.from(
+      { length: 10 },
+      (_, index) => ({
+        id: `${Date.now()}-${index}`,
+        type,
+        symbol:
+          symbols[
+            Math.floor(Math.random() * symbols.length)
+          ],
+        left: 35 + Math.random() * 30,
+        top: 48 + Math.random() * 10,
+        size: 16 + Math.random() * 12,
+        drift: (Math.random() - 0.5) * 100,
+        duration: 1.8 + Math.random() * 0.8,
+      })
+    );
+
+    setParticles((previous) => [
+      ...previous,
+      ...newParticles,
+    ]);
+
+    setTimeout(() => {
+      setParticles((previous) =>
+        previous.filter(
+          (particle) =>
+            !newParticles.some(
+              (item) => item.id === particle.id
+            )
+        )
+      );
+    }, 3000);
+  };
+
+  const handleSendHeart = () => {
+    const nextClick = clickCount + 1;
+    setClickCount(nextClick);
+
+    const type =
+      nextClick % 2 === 1
+        ? "heart"
+        : "flower";
+
+    createParticles(type);
+  };
+
+  return (
+    <section className="relative min-h-[100svh] w-full overflow-hidden bg-gradient-to-b from-[#17001f] via-black to-[#16001d] text-white">
+      <BackgroundStars />
+
+      <CelebrationParticles particles={particles} />
+
+      <div className="relative z-10 flex min-h-[100svh] w-full flex-col items-center justify-center px-5 py-10">
+        {/* Main visual */}
+        <div className="relative flex h-[340px] w-full max-w-[420px] items-center justify-center">
+          <OrbitDecorations />
+
+          {/* Glow */}
+          <motion.div
+            className="absolute h-44 w-44 rounded-full bg-pink-500/25 blur-3xl"
+            animate={{
+              scale: [0.9, 1.15, 0.9],
+              opacity: [0.45, 0.75, 0.45],
+            }}
+            transition={{
+              duration: 2.8,
+              repeat: Infinity,
+              ease: "easeInOut",
+            }}
+          />
+
+          {/* Main Heart */}
+          <motion.div
+            className="relative z-10 flex items-center justify-center text-[110px] leading-none text-pink-500"
+            animate={{
+              scale: [1, 1.06, 1],
+            }}
+            transition={{
+              duration: 1.8,
+              repeat: Infinity,
+              ease: "easeInOut",
+            }}
+            style={{
+              filter:
+                "drop-shadow(0 0 12px rgba(255,40,160,0.95)) drop-shadow(0 0 35px rgba(255,20,150,0.6))",
+            }}
+          >
+            ♥
+          </motion.div>
+        </div>
+
+        {/* Title */}
+        <motion.h1
+          className="relative z-10 mt-[-12px] text-center text-[38px] font-bold leading-tight tracking-tight sm:text-5xl"
+          initial={{
+            opacity: 0,
+            y: 15,
+          }}
+          animate={{
+            opacity: 1,
+            y: 0,
+          }}
+          transition={{
+            duration: 0.8,
+            delay: 0.2,
+          }}
+        >
+          You are my{" "}
+          <span className="bg-gradient-to-r from-pink-400 via-fuchsia-400 to-purple-400 bg-clip-text text-transparent">
+            universe
+          </span>
+        </motion.h1>
+
+        {/* Subtitle */}
+        <motion.p
+          className="relative z-10 mt-4 text-center text-lg text-gray-300 sm:text-xl"
+          initial={{
+            opacity: 0,
+            y: 12,
+          }}
+          animate={{
+            opacity: 1,
+            y: 0,
+          }}
+          transition={{
+            duration: 0.8,
+            delay: 0.35,
+          }}
+        >
+          You mean more to me than you know.
+        </motion.p>
+
+        {/* Send Button */}
+        <motion.button
+          type="button"
+          onClick={handleSendHeart}
+          className="relative z-20 mt-10 flex items-center gap-3 rounded-full border border-pink-400/30 bg-white/10 px-8 py-4 text-lg font-semibold text-pink-200 shadow-[0_0_25px_rgba(255,50,180,0.12)] backdrop-blur-md transition-all"
+          whileHover={{
+            scale: 1.05,
+            boxShadow:
+              "0 0 35px rgba(255,50,180,0.28)",
+          }}
+          whileTap={{
+            scale: 0.94,
+          }}
+        >
+          <motion.span
+            animate={{
+              y: [0, -2, 0],
+            }}
+            transition={{
+              duration: 1.2,
+              repeat: Infinity,
+            }}
+          >
+            ♡
+          </motion.span>
+
+          <span>Send a heart</span>
+        </motion.button>
+
+        {/* Tiny hint */}
+        <motion.p
+          className="relative z-10 mt-4 text-sm text-white/35"
+          animate={{
+            opacity: [0.35, 0.65, 0.35],
+          }}
+          transition={{
+            duration: 2.5,
+            repeat: Infinity,
+          }}
+        >
+          tap again for a little surprise ✨
+        </motion.p>
+
+        {/* Small bottom decoration */}
+        <div className="absolute bottom-5 left-0 right-0 text-center text-xs text-white/20">
+          made with a little bit of magic ✦
+        </div>
+      </div>
+    </section>
   );
 }
 
@@ -502,25 +850,26 @@ export default function App() {
       onNext={() => setCurrentScreen(4)}
     />,
 
-    <OutroScreen
-      key="outro"
+    <FinalScreen
+      key="final"
     />,
   ];
 
   return (
-    <div className="relative min-h-screen w-full overflow-hidden bg-gradient-to-b from-purple-500/20 via-black to-fuchsia-600/20">
+    <div className="relative min-h-screen w-full overflow-hidden bg-black">
       {!unlocked ? (
         <PasswordScreen
           onUnlock={() => setUnlocked(true)}
         />
       ) : (
-        <main className="relative w-full min-h-screen flex items-center justify-center p-6 py-10">
+        <main className="relative min-h-screen w-full">
           <AnimatePresence mode="wait">
             <motion.div
               key={currentScreen}
+              className="min-h-screen w-full"
               initial={{
                 opacity: 0,
-                scale: 0.95,
+                scale: 0.97,
                 y: 20,
               }}
               animate={{
@@ -530,7 +879,7 @@ export default function App() {
               }}
               exit={{
                 opacity: 0,
-                scale: 0.95,
+                scale: 0.97,
                 y: -20,
               }}
               transition={{
