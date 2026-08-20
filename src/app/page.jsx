@@ -1,3 +1,5 @@
+Updated page.jsx
+
 "use client";
 
 import { useState } from "react";
@@ -5,6 +7,7 @@ import { motion, AnimatePresence } from "framer-motion";
 
 import IntroScreen from "@/components/screens/IntroScreen";
 import StarScreen from "@/components/screens/StarScreen";
+import ImportanceScreen from "@/components/screens/ImportanceScreen";
 import MessageScreen from "@/components/screens/MessageScreen";
 import OutroScreen from "@/components/screens/OutroScreen";
 
@@ -78,7 +81,6 @@ function PasswordGirl({ state }) {
         {/* Eyes */}
         {!isChecking && !isWrong && !isHappy ? (
           <>
-            {/* Closed eyes */}
             <path
               d="M92 125 Q105 137 118 125"
               stroke="#3b2430"
@@ -86,6 +88,7 @@ function PasswordGirl({ state }) {
               fill="none"
               strokeLinecap="round"
             />
+
             <path
               d="M142 125 Q155 137 168 125"
               stroke="#3b2430"
@@ -96,15 +99,49 @@ function PasswordGirl({ state }) {
           </>
         ) : (
           <>
-            {/* Open eyes */}
-            <ellipse cx="105" cy="126" rx="13" ry="17" fill="white" />
-            <ellipse cx="155" cy="126" rx="13" ry="17" fill="white" />
+            <ellipse
+              cx="105"
+              cy="126"
+              rx="13"
+              ry="17"
+              fill="white"
+            />
 
-            <circle cx="106" cy="129" r="6" fill="#302030" />
-            <circle cx="156" cy="129" r="6" fill="#302030" />
+            <ellipse
+              cx="155"
+              cy="126"
+              rx="13"
+              ry="17"
+              fill="white"
+            />
 
-            <circle cx="108" cy="126" r="2" fill="white" />
-            <circle cx="158" cy="126" r="2" fill="white" />
+            <circle
+              cx="106"
+              cy="129"
+              r="6"
+              fill="#302030"
+            />
+
+            <circle
+              cx="156"
+              cy="129"
+              r="6"
+              fill="#302030"
+            />
+
+            <circle
+              cx="108"
+              cy="126"
+              r="2"
+              fill="white"
+            />
+
+            <circle
+              cx="158"
+              cy="126"
+              r="2"
+              fill="white"
+            />
           </>
         )}
 
@@ -116,6 +153,7 @@ function PasswordGirl({ state }) {
           fill="none"
           strokeLinecap="round"
         />
+
         <path
           d="M142 105 Q155 96 169 105"
           stroke="#4a2635"
@@ -169,6 +207,7 @@ function PasswordGirl({ state }) {
           fill="#f28da2"
           opacity="0.35"
         />
+
         <ellipse
           cx="178"
           cy="151"
@@ -178,7 +217,7 @@ function PasswordGirl({ state }) {
           opacity="0.35"
         />
 
-        {/* Hands covering eyes while typing */}
+        {/* Hands */}
         {!isChecking && !isWrong && !isHappy && (
           <>
             <motion.path
@@ -218,7 +257,10 @@ function PasswordGirl({ state }) {
               rx="5"
               ry="10"
               fill="#66c7ff"
-              animate={{ y: [0, 28], opacity: [1, 0] }}
+              animate={{
+                y: [0, 28],
+                opacity: [1, 0],
+              }}
               transition={{
                 duration: 0.8,
                 repeat: Infinity,
@@ -231,7 +273,10 @@ function PasswordGirl({ state }) {
               rx="5"
               ry="10"
               fill="#66c7ff"
-              animate={{ y: [0, 28], opacity: [1, 0] }}
+              animate={{
+                y: [0, 28],
+                opacity: [1, 0],
+              }}
               transition={{
                 duration: 0.8,
                 repeat: Infinity,
@@ -259,7 +304,7 @@ function PasswordGirl({ state }) {
           fill="#b66cff"
         />
 
-        {/* Small heart */}
+        {/* Heart */}
         <motion.text
           x="130"
           y="258"
@@ -300,21 +345,18 @@ function PasswordScreen({ onUnlock }) {
       return;
     }
 
-    // First open the girl's eyes
     setState("checking");
 
     setTimeout(() => {
       if (password === correctPassword) {
         setState("happy");
 
-        // Give the happy animation a moment
         setTimeout(() => {
           onUnlock();
         }, 1100);
       } else {
         setState("wrong");
 
-        // Return to normal typing state
         setTimeout(() => {
           setState("typing");
           setPassword("");
@@ -337,9 +379,19 @@ function PasswordScreen({ onUnlock }) {
 
       <motion.div
         className="password-card"
-        initial={{ opacity: 0, y: 30, scale: 0.96 }}
-        animate={{ opacity: 1, y: 0, scale: 1 }}
-        transition={{ duration: 0.7 }}
+        initial={{
+          opacity: 0,
+          y: 30,
+          scale: 0.96,
+        }}
+        animate={{
+          opacity: 1,
+          y: 0,
+          scale: 1,
+        }}
+        transition={{
+          duration: 0.7,
+        }}
       >
         {/* Girl */}
         <div className="character-area">
@@ -351,7 +403,9 @@ function PasswordScreen({ onUnlock }) {
           className="password-title"
           animate={
             state === "wrong"
-              ? { x: [0, -5, 5, 0] }
+              ? {
+                  x: [0, -5, 5, 0],
+                }
               : {}
           }
         >
@@ -361,7 +415,7 @@ function PasswordScreen({ onUnlock }) {
             ? "Oops... 😢"
             : state === "checking"
             ? "Let me check madam... 👀"
-            : "A little secret from my heart  🔐"}
+            : "A little secret from my heart 🔐"}
         </motion.h1>
 
         <p className="password-subtitle">
@@ -381,11 +435,16 @@ function PasswordScreen({ onUnlock }) {
             placeholder="enter our secret code 🤫"
             value={password}
             onChange={(e) => {
-              setPassword(e.target.value.replace(/\D/g, ""));
+              setPassword(
+                e.target.value.replace(/\D/g, "")
+              );
               setState("typing");
             }}
             onKeyDown={handleKeyDown}
-            disabled={state === "checking" || state === "happy"}
+            disabled={
+              state === "checking" ||
+              state === "happy"
+            }
             className="password-input"
           />
         </div>
@@ -393,7 +452,10 @@ function PasswordScreen({ onUnlock }) {
         {/* Button */}
         <motion.button
           onClick={checkPassword}
-          disabled={state === "checking" || state === "happy"}
+          disabled={
+            state === "checking" ||
+            state === "happy"
+          }
           className="unlock-button"
           whileHover={{ scale: 1.04 }}
           whileTap={{ scale: 0.96 }}
@@ -422,19 +484,32 @@ export default function App() {
   const [currentScreen, setCurrentScreen] = useState(0);
 
   const screens = [
+    /* 0 — Intro */
     <IntroScreen
       key="1"
       onNext={() => setCurrentScreen(1)}
     />,
+
+    /* 1 — Star Screen */
     <StarScreen
       key="2"
       onNext={() => setCurrentScreen(2)}
     />,
-    <MessageScreen
+
+    /* 2 — Importance Screen */
+    <ImportanceScreen
       key="3"
       onNext={() => setCurrentScreen(3)}
     />,
-    <OutroScreen key="4" />,
+
+    /* 3 — Message Screen */
+    <MessageScreen
+      key="4"
+      onNext={() => setCurrentScreen(4)}
+    />,
+
+    /* 4 — Outro */
+    <OutroScreen key="5" />,
   ];
 
   return (
