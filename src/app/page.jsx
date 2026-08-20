@@ -356,11 +356,11 @@ function PasswordScreen({ onUnlock }) {
           }
         >
           {state === "happy"
-            ? "Welcome! 💖"
+            ? "Welcome bou! 🫶🥀"
             : state === "wrong"
             ? "Oops... 😢"
             : state === "checking"
-            ? "Let me check... 👀"
+            ? "Let me check madam... 👀"
             : "A little secret 🔐"}
         </motion.h1>
 
