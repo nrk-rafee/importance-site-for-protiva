@@ -361,7 +361,7 @@ function PasswordScreen({ onUnlock }) {
             ? "Oops... 😢"
             : state === "checking"
             ? "Let me check madam... 👀"
-            : "A little secret 🔐"}
+            : "A little secret from my heart  🔐"}
         </motion.h1>
 
         <p className="password-subtitle">
@@ -369,7 +369,7 @@ function PasswordScreen({ onUnlock }) {
             ? "That password isn't right..."
             : state === "happy"
             ? "You got it right! ✨"
-            : "Enter the password to continue"}
+            : "Enter the secret code to continue😉"}
         </p>
 
         {/* Password */}
@@ -378,7 +378,7 @@ function PasswordScreen({ onUnlock }) {
             type="password"
             inputMode="numeric"
             maxLength={4}
-            placeholder="Enter password"
+            placeholder="enter our secret code 🤫"
             value={password}
             onChange={(e) => {
               setPassword(e.target.value.replace(/\D/g, ""));
