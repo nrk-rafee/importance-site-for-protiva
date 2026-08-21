@@ -24,16 +24,10 @@ function PasswordGirl({ state }) {
       className="girl-wrapper"
       animate={
         isWrong
-          ? {
-              x: [0, -8, 8, -6, 6, 0],
-            }
+          ? { x: [0, -8, 8, -6, 6, 0] }
           : isHappy
-          ? {
-              y: [0, -8, 0],
-            }
-          : {
-              y: [0, -4, 0],
-            }
+          ? { y: [0, -8, 0] }
+          : { y: [0, -4, 0] }
       }
       transition={{
         duration: isWrong ? 0.45 : 2,
@@ -46,7 +40,6 @@ function PasswordGirl({ state }) {
         className="girl-svg"
         xmlns="http://www.w3.org/2000/svg"
       >
-        {/* Hair */}
         <path
           d="M55 120 C35 55 72 18 130 20 C188 18 225 55 205 120
              C230 150 216 220 190 235
@@ -55,7 +48,6 @@ function PasswordGirl({ state }) {
           fill="#3b1f35"
         />
 
-        {/* Face */}
         <ellipse
           cx="130"
           cy="130"
@@ -64,7 +56,6 @@ function PasswordGirl({ state }) {
           fill="#ffd7bd"
         />
 
-        {/* Hair bangs */}
         <path
           d="M62 92 C70 35 110 25 130 28
              C155 24 193 42 199 94
@@ -73,11 +64,9 @@ function PasswordGirl({ state }) {
           fill="#3b1f35"
         />
 
-        {/* Ears */}
         <circle cx="57" cy="133" r="14" fill="#ffd0b5" />
         <circle cx="203" cy="133" r="14" fill="#ffd0b5" />
 
-        {/* Eyes */}
         {!isChecking && !isWrong && !isHappy ? (
           <>
             <path
@@ -114,37 +103,14 @@ function PasswordGirl({ state }) {
               fill="white"
             />
 
-            <circle
-              cx="106"
-              cy="129"
-              r="6"
-              fill="#302030"
-            />
+            <circle cx="106" cy="129" r="6" fill="#302030" />
+            <circle cx="156" cy="129" r="6" fill="#302030" />
 
-            <circle
-              cx="156"
-              cy="129"
-              r="6"
-              fill="#302030"
-            />
-
-            <circle
-              cx="108"
-              cy="126"
-              r="2"
-              fill="white"
-            />
-
-            <circle
-              cx="158"
-              cy="126"
-              r="2"
-              fill="white"
-            />
+            <circle cx="108" cy="126" r="2" fill="white" />
+            <circle cx="158" cy="126" r="2" fill="white" />
           </>
         )}
 
-        {/* Eyebrows */}
         <path
           d="M91 105 Q105 96 118 105"
           stroke="#4a2635"
@@ -161,7 +127,6 @@ function PasswordGirl({ state }) {
           strokeLinecap="round"
         />
 
-        {/* Nose */}
         <path
           d="M128 130 Q123 146 130 148"
           stroke="#d69a83"
@@ -170,7 +135,6 @@ function PasswordGirl({ state }) {
           strokeLinecap="round"
         />
 
-        {/* Mouth */}
         {isHappy ? (
           <path
             d="M106 160 Q130 184 154 160"
@@ -197,7 +161,6 @@ function PasswordGirl({ state }) {
           />
         )}
 
-        {/* Blush */}
         <ellipse
           cx="82"
           cy="151"
@@ -216,7 +179,6 @@ function PasswordGirl({ state }) {
           opacity="0.35"
         />
 
-        {/* Hands */}
         {!isChecking && !isWrong && !isHappy && (
           <>
             <motion.path
@@ -247,7 +209,6 @@ function PasswordGirl({ state }) {
           </>
         )}
 
-        {/* Tears */}
         {isWrong && (
           <>
             <motion.ellipse
@@ -285,7 +246,6 @@ function PasswordGirl({ state }) {
           </>
         )}
 
-        {/* Neck */}
         <rect
           x="112"
           y="200"
@@ -295,7 +255,6 @@ function PasswordGirl({ state }) {
           fill="#ffd0b5"
         />
 
-        {/* Clothes */}
         <path
           d="M70 295 Q75 225 112 215
              Q130 230 148 215
@@ -303,7 +262,6 @@ function PasswordGirl({ state }) {
           fill="#b66cff"
         />
 
-        {/* Heart */}
         <motion.text
           x="130"
           y="258"
@@ -311,9 +269,7 @@ function PasswordGirl({ state }) {
           fontSize="25"
           animate={
             isHappy
-              ? {
-                  scale: [1, 1.3, 1],
-                }
+              ? { scale: [1, 1.3, 1] }
               : {}
           }
           transition={{
@@ -400,9 +356,7 @@ function PasswordScreen({ onUnlock }) {
           className="password-title"
           animate={
             state === "wrong"
-              ? {
-                  x: [0, -5, 5, 0],
-                }
+              ? { x: [0, -5, 5, 0] }
               : {}
           }
         >
@@ -479,57 +433,52 @@ export default function App() {
   const [currentScreen, setCurrentScreen] = useState(0);
 
   const screens = [
-    /* 0 — Intro */
     <IntroScreen
       key="intro"
       onNext={() => setCurrentScreen(1)}
     />,
 
-    /* 1 — Stars */
     <StarScreen
       key="star"
       onNext={() => setCurrentScreen(2)}
     />,
 
-    /* 2 — Importance */
     <ImportanceScreen
       key="importance"
       onNext={() => setCurrentScreen(3)}
     />,
 
-    /* 3 — NEW Balloon Part */
     <BalloonScreen
       key="balloons"
       onNext={() => setCurrentScreen(4)}
     />,
 
-    /* 4 — Your Existing Letter / Message */
     <MessageScreen
       key="message"
       onNext={() => setCurrentScreen(5)}
     />,
 
-    /* 5 — Existing Outro */
     <OutroScreen
       key="outro"
     />,
   ];
 
   return (
-    <div className="relative min-h-screen w-full overflow-hidden bg-gradient-to-b from-purple-500/20 via-black to-fuchsia-600/20">
+    <div className="relative min-h-screen w-full overflow-hidden bg-black">
       {!unlocked ? (
         <PasswordScreen
           onUnlock={() => setUnlocked(true)}
         />
       ) : (
-        <main className="relative w-full min-h-screen flex items-center justify-center p-6 py-10">
+        <main className="relative w-full min-h-screen">
           <AnimatePresence mode="wait">
             <motion.div
               key={currentScreen}
+              className="w-full min-h-screen"
               initial={{
                 opacity: 0,
-                scale: 0.95,
-                y: 20,
+                scale: 0.98,
+                y: 15,
               }}
               animate={{
                 opacity: 1,
@@ -538,8 +487,8 @@ export default function App() {
               }}
               exit={{
                 opacity: 0,
-                scale: 0.95,
-                y: -20,
+                scale: 0.98,
+                y: -15,
               }}
               transition={{
                 duration: 0.5,
