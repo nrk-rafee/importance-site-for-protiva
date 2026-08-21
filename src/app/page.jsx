@@ -7,6 +7,7 @@ import IntroScreen from "@/components/screens/IntroScreen";
 import StarScreen from "@/components/screens/StarScreen";
 import ImportanceScreen from "@/components/screens/ImportanceScreen";
 import MessageScreen from "@/components/screens/MessageScreen";
+import BalloonScreen from "@/components/screens/BalloonScreen";
 
 /* =========================
    Cute Password Character
@@ -588,7 +589,8 @@ function CelebrationParticles({ particles }) {
               left: `${particle.left}%`,
               top: `${particle.top}%`,
               fontSize: `${particle.size}px`,
-              filter: "drop-shadow(0 0 8px rgba(255,80,190,0.8))",
+              filter:
+                "drop-shadow(0 0 8px rgba(255,80,190,0.8))",
             }}
             initial={{
               opacity: 0,
@@ -848,6 +850,11 @@ export default function App() {
     <MessageScreen
       key="message"
       onNext={() => setCurrentScreen(4)}
+    />,
+
+    <BalloonScreen
+      key="balloons"
+      onNext={() => setCurrentScreen(5)}
     />,
 
     <FinalScreen
